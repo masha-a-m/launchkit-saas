@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LaunchKit Features</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#070707;
+color:white;
+overflow-x:hidden;
+}
+
+.gradient-text{
+background:linear-gradient(90deg,#8b5cf6,#60a5fa);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.glass{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.hero-glow{
+position:absolute;
+width:700px;
+height:700px;
+background:radial-gradient(circle,#6d5ef940,transparent 70%);
+filter:blur(80px);
+top:-200px;
+left:50%;
+transform:translateX(-50%);
+}
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:.8s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.feature-card{
+transition:.4s ease;
+}
+
+.feature-card:hover{
+transform:translateY(-8px);
+border-color:rgba(255,255,255,.2);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10">
+
+<div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+
+<a href="index.html" class="text-2xl font-bold">
+LaunchKit
+</a>
+
+<div class="hidden md:flex gap-8 text-gray-300">
+
+<a href="index.html">Home</a> <a href="features.html" class="text-white">Features</a> <a href="pricing.html">Pricing</a> <a href="about.html">About</a>
+
+</div>
+
+<a href="#" class="bg-white text-black px-5 py-3 rounded-full font-semibold">
+Start Free Trial
+</a>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="relative pt-40 pb-32 px-6">
+
+<div class="hero-glow"></div>
+
+<div class="max-w-5xl mx-auto text-center relative z-10">
+
+<span class="glass px-4 py-2 rounded-full text-sm">
+✨ Product Features
+</span>
+
+<h1 class="text-6xl md:text-8xl font-black mt-8 leading-tight">
+
+Everything you need <br>
+
+<span class="gradient-text">
+to grow faster.
+</span>
+
+</h1>
+
+<p class="text-gray-400 text-xl max-w-3xl mx-auto mt-8">
+
+LaunchKit combines powerful automation, intelligent analytics,
+collaboration tools, and enterprise security into one seamless platform.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- BENTO GRID -->
+
+<section class="pb-32 px-6">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="grid lg:grid-cols-3 gap-6">
+
+<div class="glass rounded-3xl p-10 lg:col-span-2 feature-card reveal">
+
+<h3 class="text-3xl font-bold mb-6">
+⚡ Smart Automation
+</h3>
+
+<p class="text-gray-400 text-lg">
+
+Automate repetitive tasks, approval workflows, customer onboarding,
+lead management, notifications, and reporting without writing code.
+
+</p>
+
+<div class="mt-10 h-64 rounded-2xl bg-gradient-to-r from-violet-600/20 to-blue-500/20"></div>
+
+</div>
+
+<div class="glass rounded-3xl p-10 feature-card reveal">
+
+<h3 class="text-3xl font-bold mb-6">
+🤖 AI Assistant
+</h3>
+
+<p class="text-gray-400">
+
+Generate insights, automate actions, identify opportunities,
+and make better decisions using AI-powered recommendations.
+
+</p>
+
+</div>
+
+<div class="glass rounded-3xl p-10 feature-card reveal">
+
+<h3 class="text-3xl font-bold mb-6">
+📊 Analytics
+</h3>
+
+<p class="text-gray-400">
+
+Monitor KPIs, customer growth, revenue trends,
+and team performance in real time.
+
+</p>
+
+</div>
+
+<div class="glass rounded-3xl p-10 feature-card reveal">
+
+<h3 class="text-3xl font-bold mb-6">
+🔒 Security
+</h3>
+
+<p class="text-gray-400">
+
+Enterprise-grade encryption, role-based access,
+audit logs, and compliance-ready infrastructure.
+
+</p>
+
+</div>
+
+<div class="glass rounded-3xl p-10 feature-card reveal">
+
+<h3 class="text-3xl font-bold mb-6">
+🌎 Global Infrastructure
+</h3>
+
+<p class="text-gray-400">
+
+Fast loading times, worldwide delivery,
+and 99.9% uptime reliability.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FEATURE SECTION 1 -->
+
+<section class="py-24 px-6">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="grid lg:grid-cols-2 gap-20 items-center">
+
+<div class="reveal">
+
+<span class="text-violet-400 font-semibold">
+AUTOMATION
+</span>
+
+<h2 class="text-5xl font-bold mt-4 mb-8">
+
+Build workflows
+that run themselves.
+
+</h2>
+
+<p class="text-gray-400 text-xl mb-8">
+
+LaunchKit helps you automate recurring tasks,
+approvals, customer journeys, project updates,
+and internal processes with ease.
+
+</p>
+
+<ul class="space-y-4 text-gray-300">
+
+<li>✓ Visual workflow builder</li>
+<li>✓ Event-based triggers</li>
+<li>✓ Automated notifications</li>
+<li>✓ Multi-step processes</li>
+
+</ul>
+
+</div>
+
+<div class="glass rounded-3xl p-8 reveal">
+
+<div class="h-96 rounded-2xl bg-gradient-to-br from-violet-600/20 to-blue-500/20"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FEATURE SECTION 2 -->
+
+<section class="py-24 px-6">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="grid lg:grid-cols-2 gap-20 items-center">
+
+<div class="glass rounded-3xl p-8 order-2 lg:order-1 reveal">
+
+<div class="h-96 rounded-2xl bg-gradient-to-br from-blue-600/20 to-cyan-500/20"></div>
+
+</div>
+
+<div class="order-1 lg:order-2 reveal">
+
+<span class="text-blue-400 font-semibold">
+ANALYTICS
+</span>
+
+<h2 class="text-5xl font-bold mt-4 mb-8">
+
+See everything.
+Understand anything.
+
+</h2>
+
+<p class="text-gray-400 text-xl mb-8">
+
+Transform raw data into meaningful insights.
+Track performance, identify opportunities,
+and make informed decisions confidently.
+
+</p>
+
+<ul class="space-y-4 text-gray-300">
+
+<li>✓ Real-time dashboards</li>
+<li>✓ Revenue tracking</li>
+<li>✓ Team performance reports</li>
+<li>✓ Advanced filtering</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FEATURE SECTION 3 -->
+
+<section class="py-24 px-6">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="grid lg:grid-cols-2 gap-20 items-center">
+
+<div class="reveal">
+
+<span class="text-purple-400 font-semibold">
+COLLABORATION
+</span>
+
+<h2 class="text-5xl font-bold mt-4 mb-8">
+
+Bring your team
+together.
+
+</h2>
+
+<p class="text-gray-400 text-xl mb-8">
+
+Share updates, manage projects,
+assign tasks, and keep everyone aligned
+inside one collaborative workspace.
+
+</p>
+
+<ul class="space-y-4 text-gray-300">
+
+<li>✓ Shared workspaces</li>
+<li>✓ Task assignments</li>
+<li>✓ Activity tracking</li>
+<li>✓ Permission controls</li>
+
+</ul>
+
+</div>
+
+<div class="glass rounded-3xl p-8 reveal">
+
+<div class="h-96 rounded-2xl bg-gradient-to-br from-purple-600/20 to-pink-500/20"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- COMPARISON -->
+
+<section class="py-32 px-6">
+
+<div class="max-w-6xl mx-auto">
+
+<div class="text-center mb-20">
+
+<h2 class="text-5xl font-bold">
+
+Why teams switch
+to LaunchKit
+
+</h2>
+
+<p class="text-gray-400 mt-6 text-xl">
+
+More features. Less complexity.
+
+</p>
+
+</div>
+
+<div class="glass rounded-3xl overflow-hidden">
+
+<table class="w-full">
+
+<thead>
+
+<tr class="border-b border-white/10">
+
+<th class="text-left p-6">Feature</th>
+<th class="text-center p-6">LaunchKit</th>
+<th class="text-center p-6">Others</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr class="border-b border-white/10">
+
+<td class="p-6">AI Assistant</td>
+<td class="text-center">✅</td>
+<td class="text-center">❌</td>
+
+</tr>
+
+<tr class="border-b border-white/10">
+
+<td class="p-6">Workflow Automation</td>
+<td class="text-center">✅</td>
+<td class="text-center">Limited</td>
+
+</tr>
+
+<tr class="border-b border-white/10">
+
+<td class="p-6">Real-Time Analytics</td>
+<td class="text-center">✅</td>
+<td class="text-center">Extra Cost</td>
+
+</tr>
+
+<tr>
+
+<td class="p-6">Enterprise Security</td>
+<td class="text-center">✅</td>
+<td class="text-center">Varies</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CTA -->
+
+<section class="py-32 px-6">
+
+<div class="max-w-5xl mx-auto">
+
+<div class="glass rounded-[40px] p-20 text-center">
+
+<h2 class="text-6xl font-black mb-8">
+
+Ready to build faster?
+
+</h2>
+
+<p class="text-gray-400 text-xl max-w-2xl mx-auto">
+
+Join thousands of growing businesses using LaunchKit
+to automate operations and accelerate growth.
+
+</p>
+
+<a href="#"
+
+class="inline-block mt-10 bg-white text-black px-10 py-5 rounded-full font-semibold">
+
+Start Free Trial
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="border-t border-white/10 py-12">
+
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between">
+
+<h2 class="text-2xl font-bold">
+LaunchKit
+</h2>
+
+<p class="text-gray-500 mt-4 md:mt-0">
+© 2026 LaunchKit. All rights reserved.
+</p>
+
+</div>
+
+</footer>
+
+<script>
+
+const reveals=document.querySelectorAll('.reveal');
+
+window.addEventListener('scroll',()=>{
+
+reveals.forEach(item=>{
+
+const top=item.getBoundingClientRect().top;
+
+if(top<window.innerHeight-100){
+item.classList.add('active');
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
