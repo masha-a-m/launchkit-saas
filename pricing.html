@@ -1,377 +1,426 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>LaunchKit Pricing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-<title>LaunchKit Pricing</title>
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
+        body {
+            background: #070707;
+            color: white;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        .glass {
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
 
-<style>
+        .gradient-text {
+            background: linear-gradient(90deg, #8b5cf6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: .8s ease;
+        }
 
-body{
-background:#070707;
-color:white;
-overflow-x:hidden;
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.glass{
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.08);
-}
+        .card {
+            transition: .4s ease;
+        }
 
-.gradient-text{
-background:linear-gradient(90deg,#8b5cf6,#60a5fa);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, .25);
+        }
 
-.reveal{
-opacity:0;
-transform:translateY(40px);
-transition:.8s ease;
-}
+        .toggle-btn {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
+        .active-toggle {
+            background: white;
+            color: black;
+        }
 
-.card{
-transition:.4s ease;
-}
+        img,
+        svg,
+        video {
+            max-width: 100%;
+            display: block;
+        }
 
-.card:hover{
-transform:translateY(-10px);
-border-color:rgba(255,255,255,.25);
-}
+        /* mobile nav */
+        .mobile-menu {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+        }
 
-.toggle-btn{
-cursor:pointer;
-}
+        .mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+            visibility: visible;
+            padding-top: 1rem;
+            padding-bottom: 1.5rem;
+        }
 
-.active-toggle{
-background:white;
-color:black;
-}
+        .nav-link {
+            transition: color 0.2s;
+        }
 
-</style>
+        .nav-link:hover {
+            color: white;
+        }
 
+        .hamburger-line {
+            display: block;
+            width: 28px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: all 0.25s ease;
+            transform-origin: center;
+        }
+
+        .hamburger-line.middle {
+            margin: 6px 0;
+        }
+
+        .hamburger.active .hamburger-line.top {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .hamburger-line.middle {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active .hamburger-line.bottom {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* hero spacing */
+        .hero-padding {
+            padding-top: 7rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-padding {
+                padding-top: 8rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cta-glass {
+                padding: 2.5rem 1.5rem !important;
+            }
+
+            .hero-heading {
+                font-size: 3rem !important;
+                line-height: 1.1 !important;
+            }
+        }
+
+        /* FAQ */
+        .faq p {
+            transition: all 0.3s ease;
+        }
+
+        .faq p.hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-
-<nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10">
-
-<div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-
-<a href="index.html" class="text-2xl font-bold">LaunchKit</a>
-
-<div class="hidden md:flex gap-8 text-gray-300">
-
-<a href="index.html">Home</a> <a href="features.html">Features</a> <a href="pricing.html" class="text-white">Pricing</a> <a href="about.html">About</a>
-
-</div>
-
-<a href="#" class="bg-white text-black px-5 py-3 rounded-full font-semibold">
-Start Free Trial
-</a>
-
-</div>
-
-</nav>
-
-<!-- HERO -->
-
-<section class="pt-40 pb-20 text-center px-6">
-
-<h1 class="text-6xl md:text-8xl font-black">
-
-Simple pricing <br> <span class="gradient-text">for everyone.</span>
-
-</h1>
-
-<p class="text-gray-400 text-xl mt-8 max-w-3xl mx-auto">
-
-Choose a plan that fits your stage today.
-Upgrade anytime as you grow.
-
-</p>
-
-<!-- TOGGLE -->
-
-<div class="mt-10 inline-flex glass rounded-full p-2">
-
-<button id="monthlyBtn" class="toggle-btn active-toggle px-6 py-2 rounded-full">
-Monthly
-</button>
-
-<button id="yearlyBtn" class="toggle-btn px-6 py-2 rounded-full text-gray-300">
-Yearly (Save 20%)
-</button>
-
-</div>
-
-</section>
-
-<!-- PRICING -->
-
-<section class="pb-32 px-6">
-
-<div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-
-<!-- STARTER -->
-
-<div class="glass rounded-3xl p-10 card">
-
-<h3 class="text-3xl font-bold">Starter</h3>
-
-<p class="text-gray-400 mt-2">For individuals</p>
-
-<h2 class="text-5xl font-black mt-6" id="starterPrice">$19</h2>
-
-<p class="text-gray-500">per month</p>
-
-<ul class="mt-8 space-y-3 text-gray-300">
-
-<li>✓ 5 Projects</li>
-<li>✓ Basic Analytics</li>
-<li>✓ Email Support</li>
-
-</ul>
-
-<a href="#" class="inline-block mt-10 bg-white text-black px-6 py-3 rounded-full font-semibold w-full text-center">
-Get Started
-</a>
-
-</div>
-
-<!-- PRO (HIGHLIGHTED) -->
-
-<div class="bg-white text-black rounded-3xl p-10 card relative">
-
-<div class="absolute top-4 right-4 bg-black text-white text-xs px-3 py-1 rounded-full">
-Most Popular
-</div>
-
-<h3 class="text-3xl font-bold">Pro</h3>
-
-<p class="text-gray-700 mt-2">For growing teams</p>
-
-<h2 class="text-5xl font-black mt-6" id="proPrice">$49</h2>
-
-<p class="text-gray-600">per month</p>
-
-<ul class="mt-8 space-y-3">
-
-<li>✓ Unlimited Projects</li>
-<li>✓ AI Assistant</li>
-<li>✓ Advanced Analytics</li>
-<li>✓ Priority Support</li>
-
-</ul>
-
-<a href="#" class="inline-block mt-10 bg-black text-white px-6 py-3 rounded-full font-semibold w-full text-center">
-Start Free Trial
-</a>
-
-</div>
-
-<!-- SCALE -->
-
-<div class="glass rounded-3xl p-10 card">
-
-<h3 class="text-3xl font-bold">Scale</h3>
-
-<p class="text-gray-400 mt-2">For enterprises</p>
-
-<h2 class="text-5xl font-black mt-6" id="scalePrice">$99</h2>
-
-<p class="text-gray-500">per month</p>
-
-<ul class="mt-8 space-y-3 text-gray-300">
-
-<li>✓ Everything in Pro</li>
-<li>✓ Dedicated Manager</li>
-<li>✓ Custom Integrations</li>
-<li>✓ Enterprise Security</li>
-
-</ul>
-
-<a href="#" class="inline-block mt-10 bg-white text-black px-6 py-3 rounded-full font-semibold w-full text-center">
-Contact Sales
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FAQ -->
-
-<section class="pb-32 px-6">
-
-<div class="max-w-4xl mx-auto">
-
-<h2 class="text-5xl font-bold text-center mb-16">
-Frequently Asked Questions
-</h2>
-
-<div class="space-y-4">
-
-<div class="glass p-6 rounded-2xl cursor-pointer faq">
-
-<h3 class="font-semibold">Can I cancel anytime?</h3>
-<p class="text-gray-400 mt-2 hidden">
-Yes, you can cancel your subscription anytime with no penalties.
-</p>
-
-</div>
-
-<div class="glass p-6 rounded-2xl cursor-pointer faq">
-
-<h3 class="font-semibold">Do you offer a free trial?</h3>
-<p class="text-gray-400 mt-2 hidden">
-Yes, every plan includes a 14-day free trial.
-</p>
-
-</div>
-
-<div class="glass p-6 rounded-2xl cursor-pointer faq">
-
-<h3 class="font-semibold">Can I upgrade later?</h3>
-<p class="text-gray-400 mt-2 hidden">
-Yes, you can upgrade or downgrade your plan anytime.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- CTA -->
-
-<section class="pb-32 px-6">
-
-<div class="max-w-5xl mx-auto">
-
-<div class="glass rounded-[40px] p-20 text-center">
-
-<h2 class="text-6xl font-black">
-
-Start building
-with LaunchKit today.
-
-</h2>
-
-<p class="text-gray-400 mt-6 text-xl">
-
-Join thousands of startups scaling faster with LaunchKit.
-
-</p>
-
-<a href="#" class="inline-block mt-10 bg-white text-black px-10 py-5 rounded-full font-semibold">
-Start Free Trial
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer class="border-t border-white/10 py-12 text-center">
-
-<h2 class="text-2xl font-bold">LaunchKit</h2>
-
-<p class="text-gray-500 mt-2">
-© 2026 LaunchKit. All rights reserved.
-</p>
-
-</footer>
-
-<script>
-
-// reveal animation
-const reveals=document.querySelectorAll('.reveal');
-
-window.addEventListener('scroll',()=>{
-
-reveals.forEach(item=>{
-
-const top=item.getBoundingClientRect().top;
-
-if(top<window.innerHeight-100){
-item.classList.add('active');
-}
-
-});
-
-});
-
-// pricing toggle
-const monthlyBtn=document.getElementById('monthlyBtn');
-const yearlyBtn=document.getElementById('yearlyBtn');
-
-const starter=document.getElementById('starterPrice');
-const pro=document.getElementById('proPrice');
-const scale=document.getElementById('scalePrice');
-
-monthlyBtn.onclick=()=>{
-
-monthlyBtn.classList.add('active-toggle');
-yearlyBtn.classList.remove('active-toggle');
-
-starter.innerText="$19";
-pro.innerText="$49";
-scale.innerText="$99";
-
-};
-
-yearlyBtn.onclick=()=>{
-
-yearlyBtn.classList.add('active-toggle');
-monthlyBtn.classList.remove('active-toggle');
-
-starter.innerText="$15";
-pro.innerText="$39";
-scale.innerText="$79";
-
-};
-
-// FAQ accordion
-document.querySelectorAll('.faq').forEach(item=>{
-
-item.addEventListener('click',()=>{
-
-const p=item.querySelector('p');
-p.classList.toggle('hidden');
-
-});
-
-});
-
-</script>
-
+    <!-- NAVBAR with hamburger -->
+    <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold">LaunchKit</a>
+
+            <!-- Desktop menu -->
+            <div class="hidden md:flex gap-8 text-gray-300 items-center">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="features.html" class="nav-link">Features</a>
+                <a href="pricing.html" class="nav-link text-white">Pricing</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="#" class="bg-white text-black px-5 py-3 rounded-full font-semibold text-sm ml-2">
+                    Start Free Trial
+                </a>
+            </div>
+
+            <!-- Hamburger (mobile) -->
+            <div class="md:hidden flex items-center gap-3">
+                <a href="#" class="bg-white text-black px-4 py-2 rounded-full font-semibold text-sm">
+                    Free Trial
+                </a>
+                <button id="hamburgerBtn"
+                    class="hamburger flex flex-col items-center justify-center w-10 h-10 focus:outline-none"
+                    aria-label="Toggle menu">
+                    <span class="hamburger-line top"></span>
+                    <span class="hamburger-line middle"></span>
+                    <span class="hamburger-line bottom"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile dropdown menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden bg-black/90 backdrop-blur-xl border-b border-white/10 px-4">
+            <div class="flex flex-col space-y-4 text-gray-300 text-center">
+                <a href="index.html" class="nav-link text-lg py-1">Home</a>
+                <a href="features.html" class="nav-link text-lg py-1">Features</a>
+                <a href="pricing.html" class="nav-link text-white text-lg py-1">Pricing</a>
+                <a href="about.html" class="nav-link text-lg py-1">About</a>
+                <a href="#" class="bg-white text-black px-6 py-3 rounded-full font-semibold inline-block mx-auto w-fit">
+                    Start Free Trial
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-padding pb-16 sm:pb-20 text-center px-4 sm:px-6 overflow-x-visible">
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.1] md:leading-tight hero-heading">
+            Simple pricing <br> <span class="gradient-text">for everyone.</span>
+        </h1>
+        <p class="text-gray-400 text-base sm:text-xl mt-6 sm:mt-8 max-w-3xl mx-auto px-2">
+            Choose a plan that fits your stage today.
+            Upgrade anytime as you grow.
+        </p>
+
+        <!-- TOGGLE -->
+        <div class="mt-8 sm:mt-10 inline-flex glass rounded-full p-2">
+            <button id="monthlyBtn"
+                class="toggle-btn active-toggle px-4 sm:px-6 py-2 rounded-full text-sm sm:text-base">
+                Monthly
+            </button>
+            <button id="yearlyBtn" class="toggle-btn px-4 sm:px-6 py-2 rounded-full text-gray-300 text-sm sm:text-base">
+                Yearly (Save 20%)
+            </button>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pb-20 sm:pb-32 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <!-- STARTER -->
+            <div class="glass rounded-3xl p-8 sm:p-10 card reveal">
+                <h3 class="text-2xl sm:text-3xl font-bold">Starter</h3>
+                <p class="text-gray-400 mt-2">For individuals</p>
+                <h2 class="text-4xl sm:text-5xl font-black mt-6" id="starterPrice">$19</h2>
+                <p class="text-gray-500">per month</p>
+                <ul class="mt-6 sm:mt-8 space-y-3 text-gray-300">
+                    <li>✓ 5 Projects</li>
+                    <li>✓ Basic Analytics</li>
+                    <li>✓ Email Support</li>
+                </ul>
+                <a href="#"
+                    class="inline-block mt-8 sm:mt-10 bg-white text-black px-6 py-3 rounded-full font-semibold w-full text-center">
+                    Get Started
+                </a>
+            </div>
+
+            <!-- PRO (HIGHLIGHTED) -->
+            <div class="bg-white text-black rounded-3xl p-8 sm:p-10 card relative reveal">
+                <div class="absolute top-4 right-4 bg-black text-white text-xs px-3 py-1 rounded-full">
+                    Most Popular
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-bold">Pro</h3>
+                <p class="text-gray-700 mt-2">For growing teams</p>
+                <h2 class="text-4xl sm:text-5xl font-black mt-6" id="proPrice">$49</h2>
+                <p class="text-gray-600">per month</p>
+                <ul class="mt-6 sm:mt-8 space-y-3">
+                    <li>✓ Unlimited Projects</li>
+                    <li>✓ AI Assistant</li>
+                    <li>✓ Advanced Analytics</li>
+                    <li>✓ Priority Support</li>
+                </ul>
+                <a href="#"
+                    class="inline-block mt-8 sm:mt-10 bg-black text-white px-6 py-3 rounded-full font-semibold w-full text-center">
+                    Start Free Trial
+                </a>
+            </div>
+
+            <!-- SCALE -->
+            <div class="glass rounded-3xl p-8 sm:p-10 card reveal">
+                <h3 class="text-2xl sm:text-3xl font-bold">Scale</h3>
+                <p class="text-gray-400 mt-2">For enterprises</p>
+                <h2 class="text-4xl sm:text-5xl font-black mt-6" id="scalePrice">$99</h2>
+                <p class="text-gray-500">per month</p>
+                <ul class="mt-6 sm:mt-8 space-y-3 text-gray-300">
+                    <li>✓ Everything in Pro</li>
+                    <li>✓ Dedicated Manager</li>
+                    <li>✓ Custom Integrations</li>
+                    <li>✓ Enterprise Security</li>
+                </ul>
+                <a href="#"
+                    class="inline-block mt-8 sm:mt-10 bg-white text-black px-6 py-3 rounded-full font-semibold w-full text-center">
+                    Contact Sales
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pb-20 sm:pb-32 px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl sm:text-5xl font-bold text-center mb-12 sm:mb-16">
+                Frequently Asked Questions
+            </h2>
+            <div class="space-y-4">
+                <div class="glass p-5 sm:p-6 rounded-2xl cursor-pointer faq">
+                    <h3 class="font-semibold text-base sm:text-lg">Can I cancel anytime?</h3>
+                    <p class="text-gray-400 mt-2 hidden">
+                        Yes, you can cancel your subscription anytime with no penalties.
+                    </p>
+                </div>
+                <div class="glass p-5 sm:p-6 rounded-2xl cursor-pointer faq">
+                    <h3 class="font-semibold text-base sm:text-lg">Do you offer a free trial?</h3>
+                    <p class="text-gray-400 mt-2 hidden">
+                        Yes, every plan includes a 14-day free trial.
+                    </p>
+                </div>
+                <div class="glass p-5 sm:p-6 rounded-2xl cursor-pointer faq">
+                    <h3 class="font-semibold text-base sm:text-lg">Can I upgrade later?</h3>
+                    <p class="text-gray-400 mt-2 hidden">
+                        Yes, you can upgrade or downgrade your plan anytime.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="pb-20 sm:pb-32 px-4 sm:px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="glass rounded-[40px] p-8 sm:p-12 md:p-20 text-center cta-glass">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+                    Start building <br class="sm:hidden">with LaunchKit today.
+                </h2>
+                <p class="text-gray-400 mt-4 sm:mt-6 text-lg sm:text-xl">
+                    Join thousands of startups scaling faster with LaunchKit.
+                </p>
+                <a href="#"
+                    class="inline-block mt-8 sm:mt-10 bg-white text-black px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold">
+                    Start Free Trial
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 py-8 sm:py-12 text-center px-4">
+        <h2 class="text-2xl font-bold">LaunchKit</h2>
+        <p class="text-gray-500 mt-2 text-sm sm:text-base">
+            © 2026 LaunchKit. All rights reserved.
+        </p>
+    </footer>
+
+    <script>
+        // REVEAL on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        function checkReveals() {
+            reveals.forEach(item => {
+                const top = item.getBoundingClientRect().top;
+                if (top < window.innerHeight - 100) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', checkReveals);
+        window.addEventListener('load', checkReveals);
+
+        // HAMBURGER toggle
+        const btn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // close menu when clicking a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                btn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // close on outside click
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('nav')) {
+                btn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            }
+        });
+
+        // PRICING TOGGLE
+        const monthlyBtn = document.getElementById('monthlyBtn');
+        const yearlyBtn = document.getElementById('yearlyBtn');
+        const starter = document.getElementById('starterPrice');
+        const pro = document.getElementById('proPrice');
+        const scale = document.getElementById('scalePrice');
+
+        monthlyBtn.onclick = () => {
+            monthlyBtn.classList.add('active-toggle');
+            yearlyBtn.classList.remove('active-toggle');
+            starter.innerText = "$19";
+            pro.innerText = "$49";
+            scale.innerText = "$99";
+        };
+
+        yearlyBtn.onclick = () => {
+            yearlyBtn.classList.add('active-toggle');
+            monthlyBtn.classList.remove('active-toggle');
+            starter.innerText = "$15";
+            pro.innerText = "$39";
+            scale.innerText = "$79";
+        };
+
+        // FAQ accordion
+        document.querySelectorAll('.faq').forEach(item => {
+            item.addEventListener('click', () => {
+                const p = item.querySelector('p');
+                p.classList.toggle('hidden');
+            });
+        });
+    </script>
 </body>
+
 </html>

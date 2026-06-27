@@ -1,520 +1,454 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LaunchKit — Launch Faster. Scale Smarter.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>LaunchKit — Launch Faster. Scale Smarter.</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        body {
+            background: #070707;
+            color: white;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
 
-<style>
+        .gradient-text {
+            background: linear-gradient(90deg, #8b5cf6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
+        .glass {
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
 
-html{
-scroll-behavior:smooth;
-}
+        .hero-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #6d5ef940, transparent 70%);
+            filter: blur(80px);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            max-width: 90vw;
+        }
 
-body{
-background:#070707;
-color:white;
-overflow-x:hidden;
-}
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
 
-.gradient-text{
-background:linear-gradient(90deg,#8b5cf6,#60a5fa);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
+        @keyframes float {
+            50% {
+                transform: translateY(-15px);
+            }
+        }
 
-.glass{
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.08);
-}
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: .8s ease;
+        }
 
-.hero-glow{
-position:absolute;
-width:700px;
-height:700px;
-background:radial-gradient(circle,#6d5ef940,transparent 70%);
-filter:blur(80px);
-top:-200px;
-left:50%;
-transform:translateX(-50%);
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.float{
-animation:float 6s ease-in-out infinite;
-}
+        .logo-track {
+            display: flex;
+            gap: 80px;
+            animation: marquee 25s linear infinite;
+            width: max-content;
+        }
 
-@keyframes float{
-50%{
-transform:translateY(-15px);
-}
-}
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
 
-.reveal{
-opacity:0;
-transform:translateY(50px);
-transition:.8s ease;
-}
+            to {
+                transform: translateX(-50%);
+            }
+        }
 
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
+        img,
+        svg,
+        video {
+            max-width: 100%;
+            display: block;
+        }
 
-.logo-track{
-display:flex;
-gap:80px;
-animation:marquee 25s linear infinite;
-}
+        .hero-padding {
+            padding-top: 6rem;
+        }
 
-@keyframes marquee{
-from{
-transform:translateX(0);
-}
-to{
-transform:translateX(-50%);
-}
-}
+        @media (min-width: 768px) {
+            .hero-padding {
+                padding-top: 8rem;
+            }
+        }
 
-</style>
+        section,
+        .max-w-7xl,
+        .max-w-5xl {
+            max-width: 100%;
+            overflow: visible;
+        }
 
+        @media (max-width: 640px) {
+            .cta-glass {
+                padding: 2.5rem 1.5rem !important;
+            }
+
+            .hero-heading {
+                font-size: 3rem !important;
+                line-height: 1.1 !important;
+            }
+        }
+
+        /* mobile nav */
+        .mobile-menu {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+            visibility: visible;
+            padding-top: 1rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .nav-link {
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        /* hamburger lines */
+        .hamburger-line {
+            display: block;
+            width: 28px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: all 0.25s ease;
+            transform-origin: center;
+        }
+
+        .hamburger-line.middle {
+            margin: 6px 0;
+        }
+
+        .hamburger.active .hamburger-line.top {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .hamburger-line.middle {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active .hamburger-line.bottom {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-
-<nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10">
-
-<div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-
-<h1 class="text-2xl font-bold">
-LaunchKit
-</h1>
-
-<div class="hidden md:flex gap-8 text-gray-300">
-
-<a href="#">Home</a> <a href="features.html">Features</a> <a href="pricing.html">Pricing</a> <a href="about.html">About</a>
-
-</div>
-
-<a href="#" class="bg-white text-black px-5 py-3 rounded-full font-semibold">
-Start Free Trial
-</a>
-
-</div>
-
-</nav>
-
-<!-- HERO -->
-
-<section class="relative min-h-screen flex items-center justify-center px-6">
-
-<div class="hero-glow"></div>
-
-<div class="max-w-7xl mx-auto text-center relative z-10">
-
-<span class="glass px-4 py-2 rounded-full text-sm">
-🚀 Trusted by 15,000+ startups
-</span>
-
-<h1 class="text-6xl md:text-8xl font-black mt-8 leading-tight">
-
-Launch Faster. <br>
-
-<span class="gradient-text">
-Scale Smarter.
-</span>
-
-</h1>
-
-<p class="text-gray-400 text-xl max-w-3xl mx-auto mt-8">
-
-The all-in-one SaaS platform that helps startups automate workflows,
-track growth, collaborate efficiently, and scale without complexity.
-
-</p>
-
-<div class="flex flex-wrap justify-center gap-4 mt-10">
-
-<a href="#" class="bg-white text-black px-8 py-4 rounded-full font-semibold">
-Start Free Trial
-</a>
-
-<a href="#" class="glass px-8 py-4 rounded-full">
-Watch Demo
-</a>
-
-</div>
-
-<div class="mt-20 float">
-
-<div class="glass rounded-3xl p-6 max-w-5xl mx-auto">
-
-<img
-src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200"
-class="rounded-2xl w-full"
-
->
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- LOGOS -->
-
-<section class="py-20 border-y border-white/10 overflow-hidden">
-
-<div class="logo-track text-3xl font-bold text-gray-500">
-
-<span>STRIPE</span> <span>NOTION</span> <span>SHOPIFY</span> <span>VERCEL</span> <span>SLACK</span> <span>STRIPE</span> <span>NOTION</span> <span>SHOPIFY</span> <span>VERCEL</span> <span>SLACK</span>
-
-</div>
-
-</section>
-
-<!-- FEATURES -->
-
-<section class="py-32 px-6">
-
-<div class="max-w-7xl mx-auto">
-
-<div class="text-center mb-20 reveal">
-
-<h2 class="text-5xl font-bold">
-
-Everything you need <br>
-to grow.
-
-</h2>
-
-<p class="text-gray-400 mt-6 text-xl">
-
-One platform. Infinite possibilities.
-
-</p>
-
-</div>
-
-<div class="grid md:grid-cols-4 gap-6">
-
-<div class="glass rounded-3xl p-8 reveal">
-
-<h3 class="text-2xl font-bold mb-4">
-⚡ Automation
-</h3>
-
-<p class="text-gray-400">
-Automate repetitive processes and save valuable time.
-</p>
-
-</div>
-
-<div class="glass rounded-3xl p-8 reveal">
-
-<h3 class="text-2xl font-bold mb-4">
-📈 Analytics
-</h3>
-
-<p class="text-gray-400">
-Track performance with beautiful real-time dashboards.
-</p>
-
-</div>
-
-<div class="glass rounded-3xl p-8 reveal">
-
-<h3 class="text-2xl font-bold mb-4">
-🤖 AI Assistant
-</h3>
-
-<p class="text-gray-400">
-Get recommendations powered by intelligent automation.
-</p>
-
-</div>
-
-<div class="glass rounded-3xl p-8 reveal">
-
-<h3 class="text-2xl font-bold mb-4">
-🔒 Security
-</h3>
-
-<p class="text-gray-400">
-Enterprise-grade protection built into every plan.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- SHOWCASE -->
-
-<section class="py-32 px-6">
-
-<div class="max-w-7xl mx-auto">
-
-<div class="grid lg:grid-cols-2 gap-16 items-center">
-
-<div class="reveal">
-
-<h2 class="text-5xl font-bold mb-8">
-
-Built for
-modern growth.
-
-</h2>
-
-<p class="text-gray-400 text-xl mb-8">
-
-LaunchKit helps startups, agencies, and businesses streamline
-operations and focus on what matters most.
-
-</p>
-
-<ul class="space-y-4 text-gray-300">
-
-<li>✓ Smart workflow automation</li>
-<li>✓ Team collaboration</li>
-<li>✓ Real-time reporting</li>
-<li>✓ AI-powered insights</li>
-
-</ul>
-
-</div>
-
-<div class="glass p-8 rounded-3xl reveal">
-
-<img
-src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200"
-class="rounded-2xl"
-
->
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- TESTIMONIALS -->
-
-<section class="py-32 px-6">
-
-<div class="max-w-7xl mx-auto">
-
-<div class="text-center mb-20">
-
-<h2 class="text-5xl font-bold">
-Loved by modern teams
-</h2>
-
-</div>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-<div class="glass rounded-3xl p-8">
-
-<p class="text-xl mb-6">
-"LaunchKit replaced four different tools for our team."
-</p>
-
-<h4 class="font-semibold">
-Sarah Mitchell
-</h4>
-
-</div>
-
-<div class="glass rounded-3xl p-8">
-
-<p class="text-xl mb-6">
-"Our productivity increased dramatically."
-</p>
-
-<h4 class="font-semibold">
-David Chen
-</h4>
-
-</div>
-
-<div class="glass rounded-3xl p-8">
-
-<p class="text-xl mb-6">
-"The cleanest SaaS experience we've used."
-</p>
-
-<h4 class="font-semibold">
-Jessica Moore
-</h4>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- PRICING PREVIEW -->
-
-<section class="py-32 px-6">
-
-<div class="max-w-7xl mx-auto text-center">
-
-<h2 class="text-5xl font-bold">
-Simple pricing
-</h2>
-
-<p class="text-gray-400 mt-4">
-No hidden fees. No surprises.
-</p>
-
-<div class="grid md:grid-cols-3 gap-8 mt-16">
-
-<div class="glass p-10 rounded-3xl">
-
-<h3 class="text-3xl font-bold">
-Starter
-</h3>
-
-<p class="text-5xl font-black mt-6">
-$19
-</p>
-
-<p class="text-gray-400">
-per month
-</p>
-
-</div>
-
-<div class="bg-white text-black p-10 rounded-3xl">
-
-<h3 class="text-3xl font-bold">
-Pro
-</h3>
-
-<p class="text-5xl font-black mt-6">
-$49
-</p>
-
-<p>
-per month
-</p>
-
-</div>
-
-<div class="glass p-10 rounded-3xl">
-
-<h3 class="text-3xl font-bold">
-Scale
-</h3>
-
-<p class="text-5xl font-black mt-6">
-$99
-</p>
-
-<p class="text-gray-400">
-per month
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- CTA -->
-
-<section class="py-32 px-6">
-
-<div class="max-w-5xl mx-auto text-center glass rounded-[40px] p-20">
-
-<h2 class="text-6xl font-black">
-
-Ready to launch
-your next success story?
-
-</h2>
-
-<p class="text-gray-400 mt-8 text-xl">
-
-Join thousands of companies growing with LaunchKit.
-
-</p>
-
-<a href="#"
-class="inline-block mt-10 bg-white text-black px-10 py-5 rounded-full font-semibold">
-
-Start Free Trial
-
-</a>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer class="border-t border-white/10 py-12">
-
-<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between">
-
-<h2 class="text-2xl font-bold">
-LaunchKit
-</h2>
-
-<p class="text-gray-500 mt-4 md:mt-0">
-© 2026 LaunchKit. All rights reserved.
-</p>
-
-</div>
-
-</footer>
-
-<script>
-
-const reveals=document.querySelectorAll('.reveal');
-
-window.addEventListener('scroll',()=>{
-
-reveals.forEach(item=>{
-
-const top=item.getBoundingClientRect().top;
-
-if(top<window.innerHeight-100){
-item.classList.add('active');
-}
-
-});
-
-});
-
-</script>
-
+    <!-- NAVBAR with hamburger -->
+    <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">LaunchKit</h1>
+
+            <!-- Desktop menu -->
+            <div class="hidden md:flex gap-8 text-gray-300 items-center">
+                <a href="#" class="nav-link">Home</a>
+                <a href="features.html" class="nav-link">Features</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="#" class="bg-white text-black px-5 py-3 rounded-full font-semibold text-sm ml-2">
+                    Start Free Trial
+                </a>
+            </div>
+
+            <!-- Hamburger (mobile) -->
+            <div class="md:hidden flex items-center gap-3">
+                <a href="#" class="bg-white text-black px-4 py-2 rounded-full font-semibold text-sm">
+                    Free Trial
+                </a>
+                <button id="hamburgerBtn"
+                    class="hamburger flex flex-col items-center justify-center w-10 h-10 focus:outline-none"
+                    aria-label="Toggle menu">
+                    <span class="hamburger-line top"></span>
+                    <span class="hamburger-line middle"></span>
+                    <span class="hamburger-line bottom"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile dropdown menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden bg-black/90 backdrop-blur-xl border-b border-white/10 px-4">
+            <div class="flex flex-col space-y-4 text-gray-300 text-center">
+                <a href="#" class="nav-link text-lg py-1">Home</a>
+                <a href="features.html" class="nav-link text-lg py-1">Features</a>
+                <a href="pricing.html" class="nav-link text-lg py-1">Pricing</a>
+                <a href="about.html" class="nav-link text-lg py-1">About</a>
+                <a href="#" class="bg-white text-black px-6 py-3 rounded-full font-semibold inline-block mx-auto w-fit">
+                    Start Free Trial
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO (hero-padding adds top spacing) -->
+    <section
+        class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 hero-padding overflow-x-visible">
+        <div class="hero-glow"></div>
+        <div class="max-w-7xl mx-auto text-center relative z-10 w-full">
+            <span class="glass px-4 py-2 rounded-full text-sm inline-block">
+                🚀 Trusted by 15,000+ startups
+            </span>
+            <h1
+                class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mt-6 sm:mt-8 leading-[1.1] md:leading-tight hero-heading">
+                Launch Faster. <br>
+                <span class="gradient-text">Scale Smarter.</span>
+            </h1>
+            <p class="text-gray-400 text-base sm:text-xl max-w-3xl mx-auto mt-6 sm:mt-8 px-2">
+                The all-in-one SaaS platform that helps startups automate workflows,
+                track growth, collaborate efficiently, and scale without complexity.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mt-8 sm:mt-10">
+                <a href="#" class="bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold">
+                    Start Free Trial
+                </a>
+                <a href="#" class="glass px-6 sm:px-8 py-3 sm:py-4 rounded-full">
+                    Watch Demo
+                </a>
+            </div>
+            <div class="mt-12 sm:mt-20 float">
+                <div class="glass rounded-3xl p-4 sm:p-6 max-w-5xl mx-auto">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200"
+                        class="rounded-2xl w-full" alt="Dashboard" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOGOS (marquee) -->
+    <section class="py-12 sm:py-20 border-y border-white/10 overflow-hidden">
+        <div class="logo-track text-2xl sm:text-3xl font-bold text-gray-500">
+            <span>STRIPE</span> <span>NOTION</span> <span>SHOPIFY</span> <span>VERCEL</span> <span>SLACK</span>
+            <span>STRIPE</span> <span>NOTION</span> <span>SHOPIFY</span> <span>VERCEL</span> <span>SLACK</span>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="py-20 sm:py-32 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 sm:mb-20 reveal">
+                <h2 class="text-4xl sm:text-5xl font-bold">
+                    Everything you need <br>
+                    to grow.
+                </h2>
+                <p class="text-gray-400 mt-4 sm:mt-6 text-lg sm:text-xl">
+                    One platform. Infinite possibilities.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass rounded-3xl p-6 sm:p-8 reveal">
+                    <h3 class="text-2xl font-bold mb-4">⚡ Automation</h3>
+                    <p class="text-gray-400">Automate repetitive processes and save valuable time.</p>
+                </div>
+                <div class="glass rounded-3xl p-6 sm:p-8 reveal">
+                    <h3 class="text-2xl font-bold mb-4">📈 Analytics</h3>
+                    <p class="text-gray-400">Track performance with beautiful real-time dashboards.</p>
+                </div>
+                <div class="glass rounded-3xl p-6 sm:p-8 reveal">
+                    <h3 class="text-2xl font-bold mb-4">🤖 AI Assistant</h3>
+                    <p class="text-gray-400">Get recommendations powered by intelligent automation.</p>
+                </div>
+                <div class="glass rounded-3xl p-6 sm:p-8 reveal">
+                    <h3 class="text-2xl font-bold mb-4">🔒 Security</h3>
+                    <p class="text-gray-400">Enterprise-grade protection built into every plan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWCASE -->
+    <section class="py-20 sm:py-32 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <div class="reveal">
+                    <h2 class="text-4xl sm:text-5xl font-bold mb-6 sm:mb-8">
+                        Built for <br>modern growth.
+                    </h2>
+                    <p class="text-gray-400 text-lg sm:text-xl mb-6 sm:mb-8">
+                        LaunchKit helps startups, agencies, and businesses streamline
+                        operations and focus on what matters most.
+                    </p>
+                    <ul class="space-y-3 sm:space-y-4 text-gray-300">
+                        <li>✓ Smart workflow automation</li>
+                        <li>✓ Team collaboration</li>
+                        <li>✓ Real-time reporting</li>
+                        <li>✓ AI-powered insights</li>
+                    </ul>
+                </div>
+                <div class="glass p-4 sm:p-8 rounded-3xl reveal">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200"
+                        class="rounded-2xl w-full" alt="Analytics" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-20 sm:py-32 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-14 sm:mb-20">
+                <h2 class="text-4xl sm:text-5xl font-bold">Loved by modern teams</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="glass rounded-3xl p-6 sm:p-8">
+                    <p class="text-lg sm:text-xl mb-6">"LaunchKit replaced four different tools for our team."</p>
+                    <h4 class="font-semibold">Sarah Mitchell</h4>
+                </div>
+                <div class="glass rounded-3xl p-6 sm:p-8">
+                    <p class="text-lg sm:text-xl mb-6">"Our productivity increased dramatically."</p>
+                    <h4 class="font-semibold">David Chen</h4>
+                </div>
+                <div class="glass rounded-3xl p-6 sm:p-8">
+                    <p class="text-lg sm:text-xl mb-6">"The cleanest SaaS experience we've used."</p>
+                    <h4 class="font-semibold">Jessica Moore</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING PREVIEW -->
+    <section class="py-20 sm:py-32 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-bold">Simple pricing</h2>
+            <p class="text-gray-400 mt-3 sm:mt-4">No hidden fees. No surprises.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16">
+                <div class="glass p-8 sm:p-10 rounded-3xl">
+                    <h3 class="text-2xl sm:text-3xl font-bold">Starter</h3>
+                    <p class="text-4xl sm:text-5xl font-black mt-6">$19</p>
+                    <p class="text-gray-400">per month</p>
+                </div>
+                <div class="bg-white text-black p-8 sm:p-10 rounded-3xl">
+                    <h3 class="text-2xl sm:text-3xl font-bold">Pro</h3>
+                    <p class="text-4xl sm:text-5xl font-black mt-6">$49</p>
+                    <p>per month</p>
+                </div>
+                <div class="glass p-8 sm:p-10 rounded-3xl">
+                    <h3 class="text-2xl sm:text-3xl font-bold">Scale</h3>
+                    <p class="text-4xl sm:text-5xl font-black mt-6">$99</p>
+                    <p class="text-gray-400">per month</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 sm:py-32 px-4 sm:px-6">
+        <div class="max-w-5xl mx-auto text-center glass rounded-[40px] p-8 sm:p-12 md:p-20 cta-glass">
+            <h2 class="text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+                Ready to launch <br>your next success story?
+            </h2>
+            <p class="text-gray-400 mt-6 sm:mt-8 text-lg sm:text-xl">
+                Join thousands of companies growing with LaunchKit.
+            </p>
+            <a href="#"
+                class="inline-block mt-8 sm:mt-10 bg-white text-black px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold">
+                Start Free Trial
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 py-8 sm:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <h2 class="text-2xl font-bold">LaunchKit</h2>
+            <p class="text-gray-500 text-sm sm:text-base">© 2026 LaunchKit. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS: reveal + hamburger toggle -->
+    <script>
+        // REVEAL on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        function checkReveals() {
+            reveals.forEach(item => {
+                const top = item.getBoundingClientRect().top;
+                if (top < window.innerHeight - 100) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', checkReveals);
+        window.addEventListener('load', checkReveals);
+
+        // HAMBURGER toggle
+        const btn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // close menu when clicking a link (optional)
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                btn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // close on outside click (optional)
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('nav')) {
+                btn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            }
+        });
+    </script>
 </body>
+
 </html>

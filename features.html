@@ -1,545 +1,493 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>LaunchKit Features</title>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-<title>LaunchKit Features</title>
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
 
-<script src="https://cdn.tailwindcss.com"></script>
+        body {
+            background: #070707;
+            color: white;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+        .gradient-text {
+            background: linear-gradient(90deg, #8b5cf6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        .glass {
+            background: rgba(255, 255, 255, .05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
 
-<style>
+        .hero-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #6d5ef940, transparent 70%);
+            filter: blur(80px);
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            max-width: 90vw;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
-}
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: .8s ease;
+        }
 
-html{
-scroll-behavior:smooth;
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-body{
-background:#070707;
-color:white;
-overflow-x:hidden;
-}
+        .feature-card {
+            transition: .4s ease;
+        }
 
-.gradient-text{
-background:linear-gradient(90deg,#8b5cf6,#60a5fa);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, .2);
+        }
 
-.glass{
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,.08);
-}
+        img,
+        svg,
+        video {
+            max-width: 100%;
+            display: block;
+        }
 
-.hero-glow{
-position:absolute;
-width:700px;
-height:700px;
-background:radial-gradient(circle,#6d5ef940,transparent 70%);
-filter:blur(80px);
-top:-200px;
-left:50%;
-transform:translateX(-50%);
-}
+        /* mobile nav */
+        .mobile-menu {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+        }
 
-.reveal{
-opacity:0;
-transform:translateY(40px);
-transition:.8s ease;
-}
+        .mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+            visibility: visible;
+            padding-top: 1rem;
+            padding-bottom: 1.5rem;
+        }
 
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
+        .nav-link {
+            transition: color 0.2s;
+        }
 
-.feature-card{
-transition:.4s ease;
-}
+        .nav-link:hover {
+            color: white;
+        }
 
-.feature-card:hover{
-transform:translateY(-8px);
-border-color:rgba(255,255,255,.2);
-}
+        .hamburger-line {
+            display: block;
+            width: 28px;
+            height: 2.5px;
+            background: white;
+            border-radius: 4px;
+            transition: all 0.25s ease;
+            transform-origin: center;
+        }
 
-</style>
+        .hamburger-line.middle {
+            margin: 6px 0;
+        }
 
+        .hamburger.active .hamburger-line.top {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .hamburger-line.middle {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active .hamburger-line.bottom {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* hero spacing */
+        .hero-padding {
+            padding-top: 7rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-padding {
+                padding-top: 8rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cta-glass {
+                padding: 2.5rem 1.5rem !important;
+            }
+
+            .hero-heading {
+                font-size: 3rem !important;
+                line-height: 1.1 !important;
+            }
+        }
+
+        /* table responsive */
+        .comparison-table {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .comparison-table table {
+            min-width: 480px;
+        }
+
+        @media (max-width: 480px) {
+            .comparison-table table {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-
-<nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10">
-
-<div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-
-<a href="index.html" class="text-2xl font-bold">
-LaunchKit
-</a>
-
-<div class="hidden md:flex gap-8 text-gray-300">
-
-<a href="index.html">Home</a> <a href="features.html" class="text-white">Features</a> <a href="pricing.html">Pricing</a> <a href="about.html">About</a>
-
-</div>
-
-<a href="#" class="bg-white text-black px-5 py-3 rounded-full font-semibold">
-Start Free Trial
-</a>
-
-</div>
-
-</nav>
-
-<!-- HERO -->
-
-<section class="relative pt-40 pb-32 px-6">
-
-<div class="hero-glow"></div>
-
-<div class="max-w-5xl mx-auto text-center relative z-10">
-
-<span class="glass px-4 py-2 rounded-full text-sm">
-✨ Product Features
-</span>
-
-<h1 class="text-6xl md:text-8xl font-black mt-8 leading-tight">
-
-Everything you need <br>
-
-<span class="gradient-text">
-to grow faster.
-</span>
-
-</h1>
-
-<p class="text-gray-400 text-xl max-w-3xl mx-auto mt-8">
-
-LaunchKit combines powerful automation, intelligent analytics,
-collaboration tools, and enterprise security into one seamless platform.
-
-</p>
-
-</div>
-
-</section>
-
-<!-- BENTO GRID -->
-
-<section class="pb-32 px-6">
-
-<div class="max-w-7xl mx-auto">
-
-<div class="grid lg:grid-cols-3 gap-6">
-
-<div class="glass rounded-3xl p-10 lg:col-span-2 feature-card reveal">
-
-<h3 class="text-3xl font-bold mb-6">
-⚡ Smart Automation
-</h3>
-
-<p class="text-gray-400 text-lg">
-
-Automate repetitive tasks, approval workflows, customer onboarding,
-lead management, notifications, and reporting without writing code.
-
-</p>
-
-<div class="mt-10 h-64 rounded-2xl bg-gradient-to-r from-violet-600/20 to-blue-500/20"></div>
-
-</div>
-
-<div class="glass rounded-3xl p-10 feature-card reveal">
-
-<h3 class="text-3xl font-bold mb-6">
-🤖 AI Assistant
-</h3>
-
-<p class="text-gray-400">
-
-Generate insights, automate actions, identify opportunities,
-and make better decisions using AI-powered recommendations.
-
-</p>
-
-</div>
-
-<div class="glass rounded-3xl p-10 feature-card reveal">
-
-<h3 class="text-3xl font-bold mb-6">
-📊 Analytics
-</h3>
-
-<p class="text-gray-400">
-
-Monitor KPIs, customer growth, revenue trends,
-and team performance in real time.
-
-</p>
-
-</div>
-
-<div class="glass rounded-3xl p-10 feature-card reveal">
-
-<h3 class="text-3xl font-bold mb-6">
-🔒 Security
-</h3>
-
-<p class="text-gray-400">
-
-Enterprise-grade encryption, role-based access,
-audit logs, and compliance-ready infrastructure.
-
-</p>
-
-</div>
-
-<div class="glass rounded-3xl p-10 feature-card reveal">
-
-<h3 class="text-3xl font-bold mb-6">
-🌎 Global Infrastructure
-</h3>
-
-<p class="text-gray-400">
-
-Fast loading times, worldwide delivery,
-and 99.9% uptime reliability.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FEATURE SECTION 1 -->
-
-<section class="py-24 px-6">
-
-<div class="max-w-7xl mx-auto">
-
-<div class="grid lg:grid-cols-2 gap-20 items-center">
-
-<div class="reveal">
-
-<span class="text-violet-400 font-semibold">
-AUTOMATION
-</span>
-
-<h2 class="text-5xl font-bold mt-4 mb-8">
-
-Build workflows
-that run themselves.
-
-</h2>
-
-<p class="text-gray-400 text-xl mb-8">
-
-LaunchKit helps you automate recurring tasks,
-approvals, customer journeys, project updates,
-and internal processes with ease.
-
-</p>
-
-<ul class="space-y-4 text-gray-300">
-
-<li>✓ Visual workflow builder</li>
-<li>✓ Event-based triggers</li>
-<li>✓ Automated notifications</li>
-<li>✓ Multi-step processes</li>
-
-</ul>
-
-</div>
-
-<div class="glass rounded-3xl p-8 reveal">
-
-<div class="h-96 rounded-2xl bg-gradient-to-br from-violet-600/20 to-blue-500/20"></div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FEATURE SECTION 2 -->
-
-<section class="py-24 px-6">
-
-<div class="max-w-7xl mx-auto">
-
-<div class="grid lg:grid-cols-2 gap-20 items-center">
-
-<div class="glass rounded-3xl p-8 order-2 lg:order-1 reveal">
-
-<div class="h-96 rounded-2xl bg-gradient-to-br from-blue-600/20 to-cyan-500/20"></div>
-
-</div>
-
-<div class="order-1 lg:order-2 reveal">
-
-<span class="text-blue-400 font-semibold">
-ANALYTICS
-</span>
-
-<h2 class="text-5xl font-bold mt-4 mb-8">
-
-See everything.
-Understand anything.
-
-</h2>
-
-<p class="text-gray-400 text-xl mb-8">
-
-Transform raw data into meaningful insights.
-Track performance, identify opportunities,
-and make informed decisions confidently.
-
-</p>
-
-<ul class="space-y-4 text-gray-300">
-
-<li>✓ Real-time dashboards</li>
-<li>✓ Revenue tracking</li>
-<li>✓ Team performance reports</li>
-<li>✓ Advanced filtering</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FEATURE SECTION 3 -->
-
-<section class="py-24 px-6">
-
-<div class="max-w-7xl mx-auto">
-
-<div class="grid lg:grid-cols-2 gap-20 items-center">
-
-<div class="reveal">
-
-<span class="text-purple-400 font-semibold">
-COLLABORATION
-</span>
-
-<h2 class="text-5xl font-bold mt-4 mb-8">
-
-Bring your team
-together.
-
-</h2>
-
-<p class="text-gray-400 text-xl mb-8">
-
-Share updates, manage projects,
-assign tasks, and keep everyone aligned
-inside one collaborative workspace.
-
-</p>
-
-<ul class="space-y-4 text-gray-300">
-
-<li>✓ Shared workspaces</li>
-<li>✓ Task assignments</li>
-<li>✓ Activity tracking</li>
-<li>✓ Permission controls</li>
-
-</ul>
-
-</div>
-
-<div class="glass rounded-3xl p-8 reveal">
-
-<div class="h-96 rounded-2xl bg-gradient-to-br from-purple-600/20 to-pink-500/20"></div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- COMPARISON -->
-
-<section class="py-32 px-6">
-
-<div class="max-w-6xl mx-auto">
-
-<div class="text-center mb-20">
-
-<h2 class="text-5xl font-bold">
-
-Why teams switch
-to LaunchKit
-
-</h2>
-
-<p class="text-gray-400 mt-6 text-xl">
-
-More features. Less complexity.
-
-</p>
-
-</div>
-
-<div class="glass rounded-3xl overflow-hidden">
-
-<table class="w-full">
-
-<thead>
-
-<tr class="border-b border-white/10">
-
-<th class="text-left p-6">Feature</th>
-<th class="text-center p-6">LaunchKit</th>
-<th class="text-center p-6">Others</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr class="border-b border-white/10">
-
-<td class="p-6">AI Assistant</td>
-<td class="text-center">✅</td>
-<td class="text-center">❌</td>
-
-</tr>
-
-<tr class="border-b border-white/10">
-
-<td class="p-6">Workflow Automation</td>
-<td class="text-center">✅</td>
-<td class="text-center">Limited</td>
-
-</tr>
-
-<tr class="border-b border-white/10">
-
-<td class="p-6">Real-Time Analytics</td>
-<td class="text-center">✅</td>
-<td class="text-center">Extra Cost</td>
-
-</tr>
-
-<tr>
-
-<td class="p-6">Enterprise Security</td>
-<td class="text-center">✅</td>
-<td class="text-center">Varies</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- CTA -->
-
-<section class="py-32 px-6">
-
-<div class="max-w-5xl mx-auto">
-
-<div class="glass rounded-[40px] p-20 text-center">
-
-<h2 class="text-6xl font-black mb-8">
-
-Ready to build faster?
-
-</h2>
-
-<p class="text-gray-400 text-xl max-w-2xl mx-auto">
-
-Join thousands of growing businesses using LaunchKit
-to automate operations and accelerate growth.
-
-</p>
-
-<a href="#"
-
-class="inline-block mt-10 bg-white text-black px-10 py-5 rounded-full font-semibold">
-
-Start Free Trial
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer class="border-t border-white/10 py-12">
-
-<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between">
-
-<h2 class="text-2xl font-bold">
-LaunchKit
-</h2>
-
-<p class="text-gray-500 mt-4 md:mt-0">
-© 2026 LaunchKit. All rights reserved.
-</p>
-
-</div>
-
-</footer>
-
-<script>
-
-const reveals=document.querySelectorAll('.reveal');
-
-window.addEventListener('scroll',()=>{
-
-reveals.forEach(item=>{
-
-const top=item.getBoundingClientRect().top;
-
-if(top<window.innerHeight-100){
-item.classList.add('active');
-}
-
-});
-
-});
-
-</script>
-
+    <!-- NAVBAR with hamburger -->
+    <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-xl border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold">LaunchKit</a>
+
+            <!-- Desktop menu -->
+            <div class="hidden md:flex gap-8 text-gray-300 items-center">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="features.html" class="nav-link text-white">Features</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="#" class="bg-white text-black px-5 py-3 rounded-full font-semibold text-sm ml-2">
+                    Start Free Trial
+                </a>
+            </div>
+
+            <!-- Hamburger (mobile) -->
+            <div class="md:hidden flex items-center gap-3">
+                <a href="#" class="bg-white text-black px-4 py-2 rounded-full font-semibold text-sm">
+                    Free Trial
+                </a>
+                <button id="hamburgerBtn"
+                    class="hamburger flex flex-col items-center justify-center w-10 h-10 focus:outline-none"
+                    aria-label="Toggle menu">
+                    <span class="hamburger-line top"></span>
+                    <span class="hamburger-line middle"></span>
+                    <span class="hamburger-line bottom"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile dropdown menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden bg-black/90 backdrop-blur-xl border-b border-white/10 px-4">
+            <div class="flex flex-col space-y-4 text-gray-300 text-center">
+                <a href="index.html" class="nav-link text-lg py-1">Home</a>
+                <a href="features.html" class="nav-link text-white text-lg py-1">Features</a>
+                <a href="pricing.html" class="nav-link text-lg py-1">Pricing</a>
+                <a href="about.html" class="nav-link text-lg py-1">About</a>
+                <a href="#" class="bg-white text-black px-6 py-3 rounded-full font-semibold inline-block mx-auto w-fit">
+                    Start Free Trial
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative hero-padding pb-20 sm:pb-32 px-4 sm:px-6 overflow-x-visible">
+        <div class="hero-glow"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <span class="glass px-4 py-2 rounded-full text-sm inline-block">
+                ✨ Product Features
+            </span>
+            <h1
+                class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mt-6 sm:mt-8 leading-[1.1] md:leading-tight hero-heading">
+                Everything you need <br>
+                <span class="gradient-text">to grow faster.</span>
+            </h1>
+            <p class="text-gray-400 text-base sm:text-xl max-w-3xl mx-auto mt-6 sm:mt-8 px-2">
+                LaunchKit combines powerful automation, intelligent analytics,
+                collaboration tools, and enterprise security into one seamless platform.
+            </p>
+        </div>
+    </section>
+
+    <!-- BENTO GRID -->
+    <section class="pb-20 sm:pb-32 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass rounded-3xl p-8 sm:p-10 md:col-span-2 feature-card reveal">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-6">⚡ Smart Automation</h3>
+                    <p class="text-gray-400 text-base sm:text-lg">
+                        Automate repetitive tasks, approval workflows, customer onboarding,
+                        lead management, notifications, and reporting without writing code.
+                    </p>
+                    <div
+                        class="mt-8 sm:mt-10 h-48 sm:h-64 rounded-2xl bg-gradient-to-r from-violet-600/20 to-blue-500/20">
+                    </div>
+                </div>
+
+                <div class="glass rounded-3xl p-8 sm:p-10 feature-card reveal">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-6">🤖 AI Assistant</h3>
+                    <p class="text-gray-400 text-base sm:text-lg">
+                        Generate insights, automate actions, identify opportunities,
+                        and make better decisions using AI-powered recommendations.
+                    </p>
+                </div>
+
+                <div class="glass rounded-3xl p-8 sm:p-10 feature-card reveal">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-6">📊 Analytics</h3>
+                    <p class="text-gray-400 text-base sm:text-lg">
+                        Monitor KPIs, customer growth, revenue trends,
+                        and team performance in real time.
+                    </p>
+                </div>
+
+                <div class="glass rounded-3xl p-8 sm:p-10 feature-card reveal">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-6">🔒 Security</h3>
+                    <p class="text-gray-400 text-base sm:text-lg">
+                        Enterprise-grade encryption, role-based access,
+                        audit logs, and compliance-ready infrastructure.
+                    </p>
+                </div>
+
+                <div class="glass rounded-3xl p-8 sm:p-10 feature-card reveal">
+                    <h3 class="text-2xl sm:text-3xl font-bold mb-6">🌎 Global Infrastructure</h3>
+                    <p class="text-gray-400 text-base sm:text-lg">
+                        Fast loading times, worldwide delivery,
+                        and 99.9% uptime reliability.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION 1 -->
+    <section class="py-16 sm:py-24 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="reveal">
+                    <span class="text-violet-400 font-semibold">AUTOMATION</span>
+                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 mb-6 sm:mb-8">
+                        Build workflows <br>that run themselves.
+                    </h2>
+                    <p class="text-gray-400 text-lg sm:text-xl mb-6 sm:mb-8">
+                        LaunchKit helps you automate recurring tasks,
+                        approvals, customer journeys, project updates,
+                        and internal processes with ease.
+                    </p>
+                    <ul class="space-y-3 sm:space-y-4 text-gray-300">
+                        <li>✓ Visual workflow builder</li>
+                        <li>✓ Event-based triggers</li>
+                        <li>✓ Automated notifications</li>
+                        <li>✓ Multi-step processes</li>
+                    </ul>
+                </div>
+                <div class="glass rounded-3xl p-6 sm:p-8 reveal">
+                    <div class="h-56 sm:h-96 rounded-2xl bg-gradient-to-br from-violet-600/20 to-blue-500/20"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION 2 -->
+    <section class="py-16 sm:py-24 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="glass rounded-3xl p-6 sm:p-8 order-2 lg:order-1 reveal">
+                    <div class="h-56 sm:h-96 rounded-2xl bg-gradient-to-br from-blue-600/20 to-cyan-500/20"></div>
+                </div>
+                <div class="order-1 lg:order-2 reveal">
+                    <span class="text-blue-400 font-semibold">ANALYTICS</span>
+                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 mb-6 sm:mb-8">
+                        See everything. <br>Understand anything.
+                    </h2>
+                    <p class="text-gray-400 text-lg sm:text-xl mb-6 sm:mb-8">
+                        Transform raw data into meaningful insights.
+                        Track performance, identify opportunities,
+                        and make informed decisions confidently.
+                    </p>
+                    <ul class="space-y-3 sm:space-y-4 text-gray-300">
+                        <li>✓ Real-time dashboards</li>
+                        <li>✓ Revenue tracking</li>
+                        <li>✓ Team performance reports</li>
+                        <li>✓ Advanced filtering</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE SECTION 3 -->
+    <section class="py-16 sm:py-24 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="reveal">
+                    <span class="text-purple-400 font-semibold">COLLABORATION</span>
+                    <h2 class="text-4xl sm:text-5xl font-bold mt-4 mb-6 sm:mb-8">
+                        Bring your team <br>together.
+                    </h2>
+                    <p class="text-gray-400 text-lg sm:text-xl mb-6 sm:mb-8">
+                        Share updates, manage projects,
+                        assign tasks, and keep everyone aligned
+                        inside one collaborative workspace.
+                    </p>
+                    <ul class="space-y-3 sm:space-y-4 text-gray-300">
+                        <li>✓ Shared workspaces</li>
+                        <li>✓ Task assignments</li>
+                        <li>✓ Activity tracking</li>
+                        <li>✓ Permission controls</li>
+                    </ul>
+                </div>
+                <div class="glass rounded-3xl p-6 sm:p-8 reveal">
+                    <div class="h-56 sm:h-96 rounded-2xl bg-gradient-to-br from-purple-600/20 to-pink-500/20"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON -->
+    <section class="py-20 sm:py-32 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-14 sm:mb-20">
+                <h2 class="text-4xl sm:text-5xl font-bold">Why teams switch <br class="sm:hidden">to LaunchKit</h2>
+                <p class="text-gray-400 mt-4 sm:mt-6 text-lg sm:text-xl">More features. Less complexity.</p>
+            </div>
+            <div class="glass rounded-3xl overflow-hidden comparison-table">
+                <table class="w-full min-w-[360px]">
+                    <thead>
+                        <tr class="border-b border-white/10">
+                            <th class="text-left p-4 sm:p-6 text-sm sm:text-base">Feature</th>
+                            <th class="text-center p-4 sm:p-6 text-sm sm:text-base">LaunchKit</th>
+                            <th class="text-center p-4 sm:p-6 text-sm sm:text-base">Others</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-white/10">
+                            <td class="p-4 sm:p-6 text-sm sm:text-base">AI Assistant</td>
+                            <td class="text-center text-sm sm:text-base">✅</td>
+                            <td class="text-center text-sm sm:text-base">❌</td>
+                        </tr>
+                        <tr class="border-b border-white/10">
+                            <td class="p-4 sm:p-6 text-sm sm:text-base">Workflow Automation</td>
+                            <td class="text-center text-sm sm:text-base">✅</td>
+                            <td class="text-center text-sm sm:text-base">Limited</td>
+                        </tr>
+                        <tr class="border-b border-white/10">
+                            <td class="p-4 sm:p-6 text-sm sm:text-base">Real-Time Analytics</td>
+                            <td class="text-center text-sm sm:text-base">✅</td>
+                            <td class="text-center text-sm sm:text-base">Extra Cost</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 sm:p-6 text-sm sm:text-base">Enterprise Security</td>
+                            <td class="text-center text-sm sm:text-base">✅</td>
+                            <td class="text-center text-sm sm:text-base">Varies</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 sm:py-32 px-4 sm:px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="glass rounded-[40px] p-8 sm:p-12 md:p-20 text-center cta-glass">
+                <h2 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 sm:mb-8 leading-tight">
+                    Ready to build <br class="sm:hidden">faster?
+                </h2>
+                <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto">
+                    Join thousands of growing businesses using LaunchKit
+                    to automate operations and accelerate growth.
+                </p>
+                <a href="#"
+                    class="inline-block mt-8 sm:mt-10 bg-white text-black px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold">
+                    Start Free Trial
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 py-8 sm:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <h2 class="text-2xl font-bold">LaunchKit</h2>
+            <p class="text-gray-500 text-sm sm:text-base">© 2026 LaunchKit. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // REVEAL on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        function checkReveals() {
+            reveals.forEach(item => {
+                const top = item.getBoundingClientRect().top;
+                if (top < window.innerHeight - 100) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', checkReveals);
+        window.addEventListener('load', checkReveals);
+
+        // HAMBURGER toggle
+        const btn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        // close menu when clicking a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                btn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // close on outside click
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('nav')) {
+                btn.classList.remove('active');
+                mobileMenu.classList.remove('open');
+            }
+        });
+    </script>
 </body>
+
 </html>
